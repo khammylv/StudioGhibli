@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import {movieApi} from '../api/movies';
+import {movieApi, movieApi2} from '../api/movies';
 import {mostrarPeliculaIndividual} from '../services/data'
 import '../assets/css/cards.css';
 import  {  useEffect } from "react";
@@ -27,6 +27,10 @@ const Card = ({db,setdb,
     setPersonajes(pelicula[0].people)
     setShowModal(true);
   }
+
+  movieApi2().then((response)=>{
+    console.log(response)
+  })
   return(
     <div className="peliculas" id="peliculas">
         {db.map((movies)=>(
