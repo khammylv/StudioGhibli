@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import {movieApi, movieApi2} from '../api/movies';
+import {movieApi} from '../api/movies';
 import {mostrarPeliculaIndividual} from '../services/data'
 import '../assets/css/cards.css';
 import  {  useEffect } from "react";
@@ -28,25 +28,30 @@ const Card = ({db,setdb,
     setShowModal(true);
   }
 
-  movieApi2().then((response)=>{
-    console.log(response)
-  })
   return(
     <div className="peliculas" id="peliculas">
-        {db.map((movies)=>(
-           <div className="card_pelicula" key={movies.id}>
-               <img src={movies.poster} alt={movies.title} />
-               <div className="textos_card">
-                <h2>{movies.title}</h2>
-                <p>director: {movies.director}</p>
-                <p>year: {movies.release_date}</p>
-               </div>
-               <div className="boton_card">
-                <span> <p> <i className="bx bxs-star"></i> {movies.rt_score}</p></span>
-                <button className="select" onClick={()=> movieModal(movies.id) }>view more...</button>
-               </div>
-           </div>
-        ))}    
+
+        {
+         db.length === 0 ? (
+            <h3>Cargando...</h3>
+         ) : (
+            db.map((movies)=>(
+                <article className="card_pelicula" key={movies.id}>
+                    <img src={movies.poster} alt={movies.title} />
+                    <div className="textos_card">
+                     <h2>{movies.title}</h2>
+                     <p>director: {movies.director}</p>
+                     <p>year: {movies.release_date}</p>
+                    </div>
+                    <div className="boton_card">
+                     <span> <p> <i className="bx bxs-star"></i> {movies.rt_score}</p></span>
+                     <button className="select" onClick={()=> movieModal(movies.id) }>view more...</button>
+                    </div>
+                </article>
+             ))
+         )
+        
+       }    
             
     </div>
   )
